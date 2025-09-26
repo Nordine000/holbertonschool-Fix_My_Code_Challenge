@@ -5,9 +5,15 @@
 ###
 
 result = []
+strings = []
+
 ARGV.each do |arg|
-    # skip if not integer
-    next if arg !~ /^-?[0-9]+$/
+    # Check if integer
+    if arg !~ /^-?[0-9]+$/
+        # If not an integer, add to strings array
+        strings << arg
+        next # Skip to the next argument
+    end
 
     # convert to integer
     i_arg = arg.to_i
@@ -28,4 +34,6 @@ ARGV.each do |arg|
     result << i_arg if !is_inserted
 end
 
-puts ARGV.sort
+result.concat(strings)
+
+puts result
