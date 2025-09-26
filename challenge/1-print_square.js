@@ -1,25 +1,17 @@
-#!/usr/bin/node
-/*
-    Print a square with the character #
-    
-    The size of the square must be the first argument 
-    of the program.
-*/
+#!/usr/bin/env node
 
-
-if (process.argv.length <= 2) {
-    process.stderr.write("Missing argument\n");
-    process.stderr.write("Usage: ./1-print_square.js <size>\n");
-    process.stderr.write("Example: ./1-print_square.js 8\n");
-    process.exit(1)
+function printSquare(n) {
+    const line = '#'.repeat(n);
+    for (let i = 0; i < n; i++) console.log(line);
 }
 
-const size = parseInt(process.argv[2], 10);
+if (require.main === module) {
+    const arg = process.argv[2];
+    const size = parseInt(arg, 10);
 
-if (isNaN(size)) {
-    console.log('Missing size');
-} else {
-    for (let i = 0; i < size; i++) {
-        console.log('#'.repeat(size));
-    }
+if (!arg || Number.isNaN(size) || size < 1) {
+    console.error('Usage: ./1-print_square.js <positive integer>');
+    process.exit(1);
+}
+printSquare(size);
 }
